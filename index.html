@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-    
+    <div class="display"></div>
+    <div class="buttons rows">
+        <div class="operations">
+            <div class="columns">
+                <button type="button" id="addition" class="operation">+</button>
+                <button type="button" id="subtraction" class="operation">-</button>
+                <button type="button" id="multiplication" class="operation">&times;</button>
+                <button type="button" id="division" class="operation">&divide;</button>
+            </div>
+        </div>
+        <div class="numpad">
+            <div class="columns">
+                <div class="rows">
+                    <button type="button" id="numberOne" class="number">1</button>
+                    <button type="button" id="numberTwo" class="number">2</button>
+                    <button type="button" id="numberThree" class="number">3</button>
+                </div>
+                <div class="rows">
+                    <button type="button" id="numberFour" class="number">4</button>
+                    <button type="button" id="numberFive" class="number">5</button>
+                    <button type="button" id="numberSix" class="number">6</button>
+                </div>
+                <div class="rows">
+                    <button type="button" id="numberSeven" class="number">7</button>
+                    <button type="button" id="numberEight" class="number">8</button>
+                    <button type="button" id="numberNine" class="number">9</button>
+                </div>
+                <div class="rows">
+                    <button type="button" id="negate" class="operation">+/-</button>
+                    <button type="button" id="numberZero" class="number">0</button>
+                    <button type="button" id="decimal" class="operation">.</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
