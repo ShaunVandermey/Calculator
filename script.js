@@ -65,6 +65,9 @@ function displayString(){
     if(currentNumber != null){
         displayText.textContent += currentNumber;
     }
+    if(previousNumber == null && operation == null && currentNumber == null){
+        displayText.textContent = "0";
+    }
 }
 
 function evaluate(){
@@ -91,6 +94,7 @@ function evaluate(){
                     break;
                 }
         }
+        result = Math.round(result * 10000000) / 10000000;
         displayText.textContent = result;
         previousNumber = result;
         operation = null;
@@ -98,6 +102,30 @@ function evaluate(){
         prevHasDecimal = currHasDecimal;
         currHasDecimal = false;
     }
+}
+
+function deleteAction(){
+    //remove the latest thing the user has added to the calculator
+    if(currentNumber != null){
+        if(currentNumber.length > 0){
+            currentNumber = currentNumber.substring(0, currentNumber.length - 1);
+        }
+        if(currentNumber.length == 0){
+            currentNumber = null;
+        }
+    }
+    else if(operation != null){
+        operation = null;
+    }
+    else if(previousNumber != null){
+        if(previousNumber.length > 0){
+            previousNumber = previousNumber.substring(0, previousNumber.length - 1);
+        }
+        if(previousNumber.length == 0){
+            previousNumber = null;
+        }
+    }
+    displayString();
 }
 
 function clear(){
@@ -129,10 +157,60 @@ const decimalBtn = document.getElementById("decimal");
 decimalBtn.addEventListener("click", decimal);
 const clearBtn = document.getElementById("clear");
 clearBtn.addEventListener("click", clear);
+const deleteButton = document.getElementById("delete");
+deleteButton.addEventListener("click", deleteAction);
 
 const numberBtns = document.getElementsByClassName("number");
 for(let i = 0; i < numberBtns.length; i++){
     numberBtns[i].addEventListener("click", () => appendNumber(numberBtns[i].textContent));
 }
+
+window.addEventListener("keydown", function(event){
+    if(event.defaultPrevented){
+        return;
+    }
+    switch(event.code){
+        case "Digit1":
+        case "Numpad1":
+            appendNumber("1");
+            break;
+        case "Digit2":
+        case "Numpad2":
+            appendNumber("2");
+            break;
+        case "Digit3":
+        case "Numpad3":
+            appendNumber("3");
+            break;
+        case "Digit4":
+        case "Numpad4":
+            appendNumber("4");
+            break;
+        case "Digit5":
+        case "Numpad5":
+            appendNumber("5");
+            break;
+        case "Digit6":
+        case "Numpad6":
+            appendNumber("6");
+            break;
+        case "Digit7":
+        case "Numpad7":
+            appendNumber("7");
+            break;
+        case "Digit8":
+        case "Numpad8":
+            appendNumber("8");
+            break;
+        case "Digit9":
+        case "Numpad9":
+            appendNumber("9");
+            break;
+        case "Digit0":
+        case "Numpad0":
+            appendNumber("0");
+            break;
+    }
+}, true);
 
 const displayText = document.getElementById("displayArea");
