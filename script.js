@@ -6,18 +6,25 @@ let prevHasDecimal = false;
 let currHasDecimal = false;
 let firstComplete = false;
 
-
+//for capture through UI
 function changeOperation(e){
+    string = e.currentTarget.attributes.operation.value;
+    changeStringOperation(string);
+}
+
+//for capture for keypad/after UI is pressed
+function changeStringOperation(string){
     if(previousNumber != null){
         if(currentNumber != null && operation != null){
             evaluate();
         }
-        operation = e.currentTarget.attributes.operation.value;
+        operation = string;
         firstComplete = true;
         displayString();
     }
 }
 
+//append a number to the active part of the equation
 function appendNumber(num){
     
     if(!firstComplete){
@@ -39,15 +46,22 @@ function appendNumber(num){
     displayString();
 }
 
+//add a decimal point into the active part of the equation if it doesn't have one
 function decimal(){
     if(!firstComplete){
         if(!prevHasDecimal){
+            if(previousNumber == null){
+                appendNumber("0");
+            }
             previousNumber += ".";
             prevHasDecimal = true;
         }
     }
     else{
         if(!currHasDecimal){
+            if(currentNumber == null){
+                appendNumber("0");
+            }
             currentNumber += ".";
             currHasDecimal = true;
         }
@@ -55,6 +69,7 @@ function decimal(){
     displayString();
 }
 
+//update the UI to show the current equation
 function displayString(){
     if(previousNumber != null){
         displayText.textContent = previousNumber;
@@ -70,6 +85,7 @@ function displayString(){
     }
 }
 
+//run the current calculation, assuming it's legal
 function evaluate(){
     let result = 0;
     if(previousNumber != null && operation != null && currentNumber != null){
@@ -90,7 +106,7 @@ function evaluate(){
                 }
                 else{
                     alert("Don't divide by 0, it makes the developers upset.");
-                    clear();
+                    //clear();
                     break;
                 }
         }
@@ -99,13 +115,18 @@ function evaluate(){
         previousNumber = result;
         operation = null;
         currentNumber = null;
-        prevHasDecimal = currHasDecimal;
+        prevHasDecimal = previousNumber.toString().includes(".");
         currHasDecimal = false;
+        firstComplete = false;
+        //mild chicanery because the type isn't converted back to a string implicitly, leading to issues when deleting after evaluating
+        let temp = previousNumber.toString();
+        alert(temp);
+        previousNumber = temp;
     }
 }
 
+//remove the latest thing the user has added to the calculator
 function deleteAction(){
-    //remove the latest thing the user has added to the calculator
     if(currentNumber != null){
         if(currentNumber.length > 0){
             currentNumber = currentNumber.substring(0, currentNumber.length - 1);
@@ -128,6 +149,7 @@ function deleteAction(){
     displayString();
 }
 
+//reset calculator to initial state
 function clear(){
     currentNumber = null;
     previousNumber = null;
@@ -165,6 +187,8 @@ for(let i = 0; i < numberBtns.length; i++){
     numberBtns[i].addEventListener("click", () => appendNumber(numberBtns[i].textContent));
 }
 
+
+//I'm guessing that there's a better way of capturing all of the numerical and numpad inputs, but I think it would require a larger refactor
 window.addEventListener("keydown", function(event){
     if(event.defaultPrevented){
         return;
@@ -209,6 +233,28 @@ window.addEventListener("keydown", function(event){
         case "Digit0":
         case "Numpad0":
             appendNumber("0");
+            break;
+        case "Period":
+        case "NumpadDecimal":
+            decimal();
+            break;
+        case "NumpadAdd":
+            changeStringOperation("+");
+            break;
+        case "NumpadSubtract":
+            changeStringOperation("-");
+            break;
+        case "NumpadMultiply":
+            changeStringOperation("*");
+            break;
+        case "NumpadDivide":
+            changeStringOperation("/");
+            break;
+        case "Backspace":
+            deleteAction();
+            break;
+        case "NumpadEnter":
+            evaluate();
             break;
     }
 }, true);
