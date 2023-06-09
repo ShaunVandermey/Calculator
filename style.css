@@ -1,5 +1,11 @@
 /* BOTH AREAS */
 
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 button, .displayArea{
     border-style: solid;
     border-radius: 4px;
@@ -8,13 +14,23 @@ button, .displayArea{
     color: rgb(30, 30, 30);
 }
 
+.content{
+    background-color: rgb(80, 80, 80);
+    width: 50%;
+    align-self: center;
+    justify-self: center;
+    padding: 2% 0;
+    margin: auto;
+    border-radius: 4px;
+}
+
 /* DISPLAY AREA */
 
 .display{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5% 0;
+    margin: 2% 0;
     height: 80px;
     line-height: 80px;
 }
@@ -24,7 +40,7 @@ button, .displayArea{
     background-color: skyblue;
     text-align: right;
     font-family: sans-serif;
-    width: 33%;
+    width: 90%;
     height: 100%;
     font-size: 3em;
 }
@@ -77,7 +93,7 @@ button:active{
 .footer{
     text-align: center;
     vertical-align: middle;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(80, 80, 80);
     color: white;
     width: 100%;
     position: absolute;
