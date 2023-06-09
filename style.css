@@ -1,12 +1,23 @@
-/* BOTH AREAS */
+/* ALL AREAS */
 
 body{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    height: 90vh;
+    flex-direction: column;
 }
 
-button, .displayArea{
+/* HEADER */
+
+h1{
+    margin: 15% 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+/* CALCULATOR AREA */
+
+button, .displayArea, .content{
     border-style: solid;
     border-radius: 4px;
     border-width: 5px;
@@ -15,13 +26,15 @@ button, .displayArea{
 }
 
 .content{
+    display: flex;
+    flex-direction: column;
     background-color: rgb(80, 80, 80);
     width: 50%;
     align-self: center;
     justify-self: center;
     padding: 2% 0;
-    margin: auto;
     border-radius: 4px;
+    gap: 5vh;
 }
 
 /* DISPLAY AREA */
@@ -65,7 +78,7 @@ button, .displayArea{
 }
 
 .buttons{
-    gap: 25px;
+    gap: 10vh;
     text-align: center;
 }
 
