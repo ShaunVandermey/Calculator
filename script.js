@@ -110,7 +110,7 @@ function evaluate(){
                     break;
                 }
         }
-        result = Math.round(result * 10000000) / 10000000;
+        result = Math.round(result * 100000000) / 100000000;
         displayText.textContent = result;
         previousNumber = result;
         operation = null;
@@ -120,7 +120,6 @@ function evaluate(){
         firstComplete = false;
         //mild chicanery because the type isn't converted back to a string implicitly, leading to issues when deleting after evaluating
         let temp = previousNumber.toString();
-        alert(temp);
         previousNumber = temp;
     }
 }
