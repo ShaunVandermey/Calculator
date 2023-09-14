@@ -4,8 +4,9 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 90vh;
+    height: 100vh;
     flex-direction: column;
+    margin: 0;
 }
 
 /* HEADER */
